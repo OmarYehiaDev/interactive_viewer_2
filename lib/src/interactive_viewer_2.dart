@@ -25,6 +25,8 @@ class InteractiveViewer2 extends BetterInteractiveViewer {
     super.nonCoveringZoomAlignmentVertical,
     super.doubleTapZoomOutBehaviour,
     super.clipBehavior = Clip.hardEdge,
+    super.origin,
+    super.alignment,
     required this.child,
   });
 

@@ -17,6 +17,12 @@ abstract class BetterInteractiveViewer extends BetterInteractiveViewerBase {
   /// How to clip the content.
   final Clip clipBehavior;
 
+  /// The origin of any transformation
+  final Offset? origin;
+
+  /// The alignment of the child inside the render box
+  final Alignment? alignment;
+
   BetterInteractiveViewer({
     super.key,
     super.allowNonCoveringScreenZoom,
@@ -31,12 +37,12 @@ abstract class BetterInteractiveViewer extends BetterInteractiveViewerBase {
     super.scaleFactor,
     super.doubleTapToZoom,
     super.transformationController,
-    this.nonCoveringZoomAlignmentHorizontal =
-        HorizontalNonCoveringZoomAlign.middle,
+    this.nonCoveringZoomAlignmentHorizontal = HorizontalNonCoveringZoomAlign.middle,
     this.nonCoveringZoomAlignmentVertical = VerticalNonCoveringZoomAlign.middle,
-    this.doubleTapZoomOutBehaviour =
-        DoubleTapZoomOutBehaviour.zoomOutToMinScale,
+    this.doubleTapZoomOutBehaviour = DoubleTapZoomOutBehaviour.zoomOutToMinScale,
     this.clipBehavior = Clip.none,
+    this.alignment,
+    this.origin,
   });
 
   @override
@@ -102,6 +108,8 @@ abstract class BetterInteractiveViewerState<T extends BetterInteractiveViewer>
             transform: transformForRender,
             onResize: () => Future.microtask(afterResize),
             overrideSize: overrideSize,
+            alignment: widget.alignment,
+            origin: widget.origin,
             child: child,
           ),
         );
@@ -123,8 +131,7 @@ abstract class BetterInteractiveViewerState<T extends BetterInteractiveViewer>
   }
 
   @override
-  DoubleTapZoomOutBehaviour get doubleTapZoomOutBehaviour =>
-      widget.doubleTapZoomOutBehaviour;
+  DoubleTapZoomOutBehaviour get doubleTapZoomOutBehaviour => widget.doubleTapZoomOutBehaviour;
 
   @override
   Widget build(BuildContext context) {
