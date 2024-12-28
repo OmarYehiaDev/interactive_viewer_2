@@ -21,7 +21,7 @@ abstract class BetterInteractiveViewer extends BetterInteractiveViewerBase {
   final Offset? origin;
 
   /// The alignment of the child inside the render box
-  final Alignment? alignment;
+  final AlignmentGeometry? alignment;
 
   BetterInteractiveViewer({
     super.key,
